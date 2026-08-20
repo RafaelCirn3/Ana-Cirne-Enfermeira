@@ -31,6 +31,10 @@
 
   --color-border: rgba(168, 90, 101, 0.14);
 
+  --color-card: #fffdfc;
+  --color-card-hover-start: #f8e1df;
+  --color-card-hover-end: #f9e9e7;
+
   --font-body: 'DM Sans', sans-serif;
   --font-display: 'Playfair Display', Georgia, serif;
 
@@ -51,22 +55,30 @@
    GLOBAL
    ========================================================= */
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   background: var(--color-background);
+  overflow-x: hidden;
 }
 
 ::selection {
   background: rgba(168, 90, 101, 0.18);
   color: var(--color-heading);
+}
+
+img {
+  max-width: 100%;
 }
 
 
@@ -84,11 +96,9 @@ body {
   justify-content: space-between;
 
   gap: 2rem;
-
   padding: 1rem clamp(1.25rem, 5vw, 5rem);
 
   background: rgba(255, 249, 248, 0.82);
-
   border-bottom: 1px solid rgba(168, 90, 101, 0.1);
 
   backdrop-filter: blur(20px);
@@ -102,7 +112,6 @@ body {
 .footer-brand {
   display: inline-flex;
   align-items: center;
-
   gap: 0.75rem;
 
   color: #7f4750;
@@ -135,7 +144,6 @@ body {
 
 .brand small {
   display: block;
-
   margin-top: 0.15rem;
 
   text-transform: uppercase;
@@ -153,7 +161,6 @@ body {
 nav {
   display: flex;
   align-items: center;
-
   gap: 1.35rem;
 }
 
@@ -175,7 +182,6 @@ nav a:not(.nav-cta)::after {
   content: '';
 
   position: absolute;
-
   left: 0;
   right: 100%;
   bottom: -0.38rem;
@@ -214,7 +220,6 @@ nav a:not(.nav-cta)::after {
   background: transparent;
 
   padding: 0.5rem;
-
   cursor: pointer;
 }
 
@@ -259,7 +264,6 @@ nav a:not(.nav-cta)::after {
     "text media";
 
   gap: 5rem;
-
   align-items: center;
 
   overflow: hidden;
@@ -281,23 +285,49 @@ nav a:not(.nav-cta)::after {
   grid-area: media;
 }
 
+
+/* =========================================================
+   HERO PHOTO
+   ========================================================= */
+
 .hero-card.hero-photo {
+  position: relative;
+
+  width: 100%;
+  max-width: 440px;
+
+  justify-self: center;
+
   padding: 0;
 
   overflow: hidden;
 
   aspect-ratio: 3 / 4;
+
+  border-radius: var(--radius-xl);
+
+  background: #f3e7e5;
+
+  box-shadow:
+    0 30px 80px rgba(123, 70, 80, 0.13);
+
+  border: 1px solid rgba(255, 255, 255, 0.85);
 }
 
 .hero-photo img {
+  display: block;
+
   width: 100%;
   height: 100%;
-
-  display: block;
 
   object-fit: cover;
   object-position: center 20%;
 }
+
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
 
 .eyebrow,
 .mini-label,
@@ -324,12 +354,13 @@ h2,
 .hero h1 {
   max-width: 750px;
 
-  margin: 0.9rem 0 1.25rem;
+  margin:
+    0.9rem 0 1.25rem;
 
-  font-size: clamp(3.3rem, 7vw, 7rem);
+  font-size:
+    clamp(3.3rem, 7vw, 7rem);
 
   line-height: 0.95;
-
   letter-spacing: -0.055em;
 }
 
@@ -340,7 +371,8 @@ h2,
 
   font-weight: 400;
 
-  animation: softFloat 5s ease-in-out infinite;
+  animation:
+    softFloat 5s ease-in-out infinite;
 }
 
 .hero-lead {
@@ -348,104 +380,11 @@ h2,
 
   color: #725d62;
 
-  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-size:
+    clamp(1rem, 1.5vw, 1.2rem);
 
   line-height: 1.85;
-
   letter-spacing: -0.01em;
-}
-
-
-/* =========================================================
-   HERO CARD
-   ========================================================= */
-
-.hero-card {
-  position: relative;
-
-  max-width: 440px;
-  width: 100%;
-
-  justify-self: center;
-
-  text-align: center;
-
-  padding: 3.3rem 2.5rem;
-
-  border-radius: var(--radius-xl);
-
-  background:
-    linear-gradient(145deg,
-      rgba(255, 255, 255, 0.72),
-      rgba(255, 255, 255, 0.42));
-
-  border: 1px solid rgba(255, 255, 255, 0.85);
-
-  box-shadow:
-    0 30px 80px rgba(123, 70, 80, 0.13),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
-
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-}
-
-.hero-logo {
-  width: 118px;
-
-  margin: 0 auto 1.2rem;
-
-  color: var(--color-primary);
-}
-
-.hero-logo svg {
-  width: 100%;
-
-  filter:
-    drop-shadow(0 8px 18px rgba(168, 90, 101, 0.12));
-}
-
-.script-name {
-  margin: 0;
-
-  font-size: 2.45rem;
-}
-
-.card-subtitle {
-  margin: 0.25rem 0;
-
-  text-transform: uppercase;
-  letter-spacing: 0.35em;
-
-  font-size: 0.65rem;
-  font-weight: 600;
-}
-
-.card-divider {
-  width: 54px;
-  height: 1px;
-
-  background: #d6aaae;
-
-  margin: 1.4rem auto;
-}
-
-.hero-card p:last-of-type {
-  color: #8c6970;
-
-  font-size: 0.84rem;
-}
-
-.hero-card strong {
-  display: block;
-
-  margin-top: 1rem;
-
-  color: #9c5661;
-
-  font-family: var(--font-display);
-  font-style: italic;
-
-  font-size: 1.15rem;
 }
 
 
@@ -458,13 +397,11 @@ h2,
   flex-wrap: wrap;
 
   gap: 0.8rem;
-
   margin-top: 2rem;
 }
 
 .button {
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
 
@@ -472,14 +409,15 @@ h2,
 
   min-height: 50px;
 
-  padding: 0.8rem 1.25rem;
+  padding:
+    0.8rem 1.25rem;
 
   border-radius: 999px;
 
   text-decoration: none;
 
-  font-weight: 700;
   font-size: 0.88rem;
+  font-weight: 700;
 
   transition:
     transform 0.25s ease,
@@ -490,7 +428,6 @@ h2,
 
 .primary {
   color: #fff;
-
   background: var(--color-primary);
 
   box-shadow:
@@ -500,9 +437,11 @@ h2,
 .secondary {
   color: #85515a;
 
-  border: 1px solid rgba(168, 90, 101, 0.3);
+  border:
+    1px solid rgba(168, 90, 101, 0.3);
 
-  background: rgba(255, 255, 255, 0.45);
+  background:
+    rgba(255, 255, 255, 0.45);
 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -525,22 +464,24 @@ h2,
   flex-wrap: wrap;
 
   gap: 0.65rem;
-
   margin-top: 2rem;
 }
 
 .trust-line span {
-  padding: 0.5rem 0.8rem;
+  padding:
+    0.5rem 0.8rem;
 
   border-radius: 999px;
 
-  background: rgba(255, 255, 255, 0.62);
+  background:
+    rgba(255, 255, 255, 0.62);
 
-  border: 1px solid rgba(168, 90, 101, 0.12);
-
-  font-size: 0.76rem;
+  border:
+    1px solid rgba(168, 90, 101, 0.12);
 
   color: #8e646b;
+
+  font-size: 0.76rem;
 
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -649,7 +590,6 @@ h2,
   font-family: var(--font-display);
 
   font-size: 2rem;
-
   line-height: 1;
 
   color: #b56a73;
@@ -658,13 +598,10 @@ h2,
 .care-card-label {
   color: #b2656e;
 
-  font-family: var(--font-body);
-
   font-size: 0.72rem;
   font-weight: 700;
 
   letter-spacing: 0.18em;
-
   text-transform: uppercase;
 }
 
@@ -672,7 +609,8 @@ h2,
   width: 42px;
   height: 2px;
 
-  margin: 1.25rem 0 1.55rem;
+  margin:
+    1.25rem 0 1.55rem;
 
   background: #d9979c;
 
@@ -686,23 +624,22 @@ h2,
 
   font-family: var(--font-display);
 
-  font-size: clamp(1.8rem, 2.5vw, 2.35rem);
+  font-size:
+    clamp(1.8rem, 2.5vw, 2.35rem);
 
   font-weight: 500;
 
   line-height: 1.15;
-
   letter-spacing: -0.025em;
 }
 
 .care-card p {
   max-width: 340px;
 
-  margin: 1.7rem auto 0;
+  margin:
+    1.7rem auto 0;
 
   color: #7d686d;
-
-  font-family: var(--font-body);
 
   font-size: 0.96rem;
 
@@ -719,10 +656,10 @@ h2,
 }
 
 .centered {
-  text-align: center;
-
   margin:
     0 auto 3.5rem;
+
+  text-align: center;
 }
 
 h2 {
@@ -730,12 +667,9 @@ h2 {
     0.7rem 0 1rem;
 
   font-size:
-    clamp(2.4rem,
-      4vw,
-      4.4rem);
+    clamp(2.4rem, 4vw, 4.4rem);
 
   line-height: 1.05;
-
   letter-spacing: -0.035em;
 }
 
@@ -743,23 +677,7 @@ h2 {
 .laser-copy p,
 .about-copy p {
   color: #826a6f;
-
   line-height: 1.85;
-}
-
-.laser-copy {
-  padding:
-    2.25rem 2.5rem;
-
-  border-radius: var(--radius-lg);
-
-  background: rgba(255, 255, 255, 0.55);
-
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
-  box-shadow:
-    0 20px 50px rgba(120, 65, 74, 0.08);
 }
 
 
@@ -790,40 +708,21 @@ h2 {
 
   border-radius: 24px;
 
-  background: #fffdfc;
+  background: var(--color-card);
 
   border:
-    1px solid rgba(168, 90, 101, 0.14);
+    1px solid var(--color-border);
 
   box-shadow:
     0 16px 38px rgba(104, 67, 73, 0.055);
 
   overflow: hidden;
 
-  /*
-   * IMPORTANTE:
-   * O GSAP pode animar transform durante a entrada.
-   * Depois disso o CSS assume o hover normalmente.
-   */
-
   transition:
-    background-color 0.45s ease,
+    background 0.45s ease,
     border-color 0.45s ease,
     box-shadow 0.45s ease,
     transform 0.45s cubic-bezier(.2, .7, .2, 1);
-}
-
-.service-card.featured {
-  background:
-    linear-gradient(145deg,
-      #f8e1df 0%,
-      #f9e9e7 100%);
-
-  border-color:
-    rgba(168, 90, 101, 0.22);
-
-  box-shadow:
-    0 18px 42px rgba(168, 90, 101, 0.10);
 }
 
 .service-number {
@@ -852,7 +751,8 @@ h2 {
 
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.75);
+  background:
+    rgba(255, 255, 255, 0.75);
 
   color: var(--color-primary);
 
@@ -876,18 +776,12 @@ h2 {
   font-family: var(--font-display);
 
   font-size:
-    clamp(1.65rem,
-      2.2vw,
-      2.05rem);
+    clamp(1.65rem, 2.2vw, 2.05rem);
 
   font-weight: 500;
 
   line-height: 1.15;
-
   letter-spacing: -0.025em;
-
-  transition:
-    color 0.35s ease;
 }
 
 .service-card p {
@@ -896,8 +790,6 @@ h2 {
   margin: 0;
 
   color: #806b70;
-
-  font-family: var(--font-body);
 
   font-size: 0.94rem;
 
@@ -944,6 +836,22 @@ h2 {
     var(--color-background-pink);
 }
 
+.laser-copy {
+  padding:
+    2.25rem 2.5rem;
+
+  border-radius: var(--radius-lg);
+
+  background:
+    rgba(255, 255, 255, 0.55);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 20px 50px rgba(120, 65, 74, 0.08);
+}
+
 .laser-panel {
   padding: 2.2rem;
 
@@ -972,14 +880,11 @@ h2 {
   list-style: none;
 
   padding: 0;
-
-  margin:
-    1rem 0 0;
+  margin: 1rem 0 0;
 }
 
 .laser-panel li {
   display: flex;
-
   align-items: center;
 
   gap: 1rem;
@@ -999,7 +904,6 @@ h2 {
 
 .laser-panel li span {
   font-family: var(--font-display);
-
   opacity: 0.72;
 }
 
@@ -1036,11 +940,9 @@ h2 {
   display: block;
 
   border-radius: 50%;
-
   border: 6px solid #fff;
 
   object-fit: cover;
-
   object-position: center 20%;
 
   box-shadow:
@@ -1058,9 +960,7 @@ h2 {
   height: 110px;
 
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
 
@@ -1083,7 +983,6 @@ h2 {
   font-family: var(--font-display);
 
   font-size: 1.9rem;
-
   line-height: 1;
 }
 
@@ -1093,7 +992,6 @@ h2 {
   color: #825e65;
 
   font-size: 0.6rem;
-
   line-height: 1.2;
 
   max-width: 80px;
@@ -1101,7 +999,6 @@ h2 {
 
 .credentials {
   display: flex;
-
   flex-wrap: wrap;
 
   gap: 0.6rem;
@@ -1149,7 +1046,6 @@ h2 {
 
 .faq-grid {
   display: grid;
-
   gap: 0.8rem;
 }
 
@@ -1166,13 +1062,16 @@ h2 {
 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .faq-question {
   width: 100%;
 
   display: flex;
-
   align-items: center;
   justify-content: space-between;
 
@@ -1182,7 +1081,6 @@ h2 {
     1.15rem 1.25rem;
 
   background: none;
-
   border: 0;
 
   cursor: pointer;
@@ -1190,21 +1088,18 @@ h2 {
   text-align: left;
 
   font: inherit;
-
   color: #62474c;
 
   font-weight: 700;
 }
 
 .faq-icon {
-  flex:
-    0 0 auto;
+  flex: 0 0 auto;
 
   width: 24px;
   height: 24px;
 
   display: grid;
-
   place-items: center;
 
   border-radius: 50%;
@@ -1215,7 +1110,6 @@ h2 {
   color: var(--color-primary);
 
   font-size: 1.1rem;
-
   line-height: 1;
 
   transition:
@@ -1276,9 +1170,8 @@ h2 {
 }
 
 .contact h2 {
-  color: #fff;
-
   max-width: 720px;
+  color: #fff;
 }
 
 .contact p {
@@ -1304,7 +1197,6 @@ h2 {
 
 .light-button {
   background: #fff;
-
   color: #8f4c57;
 }
 
@@ -1359,19 +1251,16 @@ footer {
 
 footer p {
   max-width: 520px;
-
   line-height: 1.5;
 }
 
 .footer-links {
   display: flex;
-
   gap: 1rem;
 }
 
 .footer-links a {
   color: #f4d9dd;
-
   text-decoration: none;
 }
 
@@ -1383,8 +1272,8 @@ footer p {
 .floating-whatsapp {
   position: fixed;
 
-  right: 1.2rem;
-  bottom: 1.2rem;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: max(1rem, env(safe-area-inset-bottom));
 
   z-index: 25;
 
@@ -1392,13 +1281,11 @@ footer p {
   height: 58px;
 
   display: grid;
-
   place-items: center;
 
   border-radius: 50%;
 
   background: #25d366;
-
   color: #fff;
 
   text-decoration: none;
@@ -1422,11 +1309,12 @@ footer p {
 
 /* =========================================================
    HOVER
-   IMPORTANTE:
-   somente mouse/trackpad.
+   Apenas dispositivos com mouse/trackpad
    ========================================================= */
 
 @media (hover: hover) and (pointer: fine) {
+
+  /* Header */
 
   .brand:hover .brand-mark {
     transform:
@@ -1443,7 +1331,6 @@ footer p {
 
   .nav-cta:hover {
     background: var(--color-primary);
-
     color: #fff !important;
 
     transform:
@@ -1452,6 +1339,9 @@ footer p {
     box-shadow:
       0 10px 24px rgba(168, 90, 101, 0.2);
   }
+
+
+  /* Buttons */
 
   .button:hover {
     transform:
@@ -1468,12 +1358,18 @@ footer p {
       rgba(255, 255, 255, 0.8);
   }
 
+
+  /* Trust */
+
   .trust-line span:hover {
     transform:
       translateY(-2px);
 
     background: #fff;
   }
+
+
+  /* Care cards */
 
   .care-card:hover {
     transform:
@@ -1494,23 +1390,18 @@ footer p {
         #efd4d1);
   }
 
-  .service-grid:has(.service-card:hover) .service-card {
-    background: #fffdfc;
 
-    border-color:
-      rgba(168, 90, 101, 0.14);
-
-    box-shadow:
-      0 16px 38px rgba(104, 67, 73, 0.055);
-
-    transform: none;
-  }
+  /* =======================================================
+     SERVICE CARDS
+     Estado normal = todos iguais
+     Hover = somente o card sob o mouse
+     ======================================================= */
 
   .service-card:hover {
     background:
       linear-gradient(145deg,
-        #f8e1df 0%,
-        #f9e9e7 100%);
+        var(--color-card-hover-start) 0%,
+        var(--color-card-hover-end) 100%);
 
     border-color:
       rgba(168, 90, 101, 0.22);
@@ -1544,6 +1435,9 @@ footer p {
       translateX(3px);
   }
 
+
+  /* Laser */
+
   .laser-panel:hover {
     box-shadow:
       0 30px 70px rgba(120, 65, 74, 0.28);
@@ -1554,6 +1448,9 @@ footer p {
       translateX(4px);
   }
 
+
+  /* Credentials */
+
   .credentials span:hover {
     transform:
       translateY(-2px);
@@ -1562,12 +1459,10 @@ footer p {
       #f4dfdc;
   }
 
-  .faq-item:hover {
-    box-shadow:
-      0 12px 28px rgba(99, 67, 73, 0.06);
-  }
 
-  details:hover {
+  /* FAQ */
+
+  .faq-item:hover {
     transform:
       translateY(-2px);
 
@@ -1575,9 +1470,15 @@ footer p {
       0 12px 28px rgba(99, 67, 73, 0.06);
   }
 
+
+  /* Footer */
+
   .footer-links a:hover {
     text-decoration: underline;
   }
+
+
+  /* WhatsApp */
 
   .floating-whatsapp:hover {
     transform:
@@ -1635,7 +1536,6 @@ footer p {
   .about,
   .faq {
     grid-template-columns: 1fr;
-
     gap: 3rem;
   }
 
@@ -1651,7 +1551,6 @@ footer p {
     justify-self: center;
 
     width: 100%;
-
     max-width: 420px;
   }
 
@@ -1683,6 +1582,8 @@ footer p {
 
 @media (max-width: 760px) {
 
+  /* Header */
+
   nav a:not(.nav-cta)::after {
     display: none;
   }
@@ -1706,7 +1607,6 @@ footer p {
     right: 0;
 
     flex-direction: column;
-
     align-items: stretch;
 
     gap: 0.2rem;
@@ -1719,11 +1619,8 @@ footer p {
     border-bottom:
       1px solid #eedbd8;
 
-    backdrop-filter:
-      blur(18px);
-
-    -webkit-backdrop-filter:
-      blur(18px);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
   }
 
   nav.open {
@@ -1738,10 +1635,16 @@ footer p {
     text-align: center;
   }
 
+
+  /* Sections */
+
   .section {
     padding:
       4.5rem 1.25rem;
   }
+
+
+  /* Hero */
 
   .hero {
     padding-top: 5rem;
@@ -1749,9 +1652,7 @@ footer p {
 
   .hero h1 {
     font-size:
-      clamp(3rem,
-        17vw,
-        5rem);
+      clamp(3rem, 17vw, 5rem);
   }
 
   .hero-card {
@@ -1760,18 +1661,35 @@ footer p {
   }
 
   .hero-card.hero-photo {
+    width: 100%;
     max-width: 300px;
 
-    margin: 0 auto;
+    margin:
+      0 auto;
 
     aspect-ratio:
       4 / 5;
   }
 
+
+  /* Buttons */
+
+  .hero-actions {
+    width: 100%;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+
+  /* Intro */
+
   .intro-strip {
     grid-template-columns: 1fr;
 
-    padding: 3rem 0;
+    padding:
+      3rem 0;
 
     gap: 1.25rem;
   }
@@ -1808,20 +1726,25 @@ footer p {
   }
 
   .care-card p {
-    margin-top: 1.1rem;
-
     max-width: 280px;
 
-    font-size: 0.85rem;
+    margin-top: 1.1rem;
 
+    font-size: 0.85rem;
     line-height: 1.6;
   }
+
+
+  /* Laser / About / FAQ */
 
   .laser,
   .about,
   .faq {
     gap: 2rem;
   }
+
+
+  /* About */
 
   .about-badge {
     max-width: 180px;
@@ -1844,7 +1767,6 @@ footer p {
 
   .about-badge-stat small {
     font-size: 0.5rem;
-
     max-width: 52px;
   }
 
@@ -1856,9 +1778,11 @@ footer p {
     display: block;
   }
 
+
+  /* Contact */
+
   .contact-actions {
     min-width: 0;
-
     width: 100%;
   }
 
@@ -1866,12 +1790,75 @@ footer p {
     justify-content: center;
   }
 
-  .floating-whatsapp {
-    right: 1rem;
-    bottom: 1rem;
 
+  /* =======================================================
+     WhatsApp
+     Impede qualquer overflow lateral
+     ======================================================= */
+
+  .floating-whatsapp {
     width: 54px;
     height: 54px;
+
+    right:
+      max(12px, env(safe-area-inset-right));
+
+    bottom:
+      max(12px, env(safe-area-inset-bottom));
+
+    max-width: calc(100vw - 24px);
+  }
+
+  .floating-whatsapp svg {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .site-header {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .brand {
+    gap: 0.5rem;
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .brand strong {
+    font-size: 1rem;
+  }
+
+  .hero {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.8rem;
+  }
+
+  .hero-card.hero-photo {
+    max-width: 270px;
+  }
+
+  .floating-whatsapp {
+    right: 10px;
+    bottom: 10px;
+
+    width: 50px;
+    height: 50px;
   }
 }
 
